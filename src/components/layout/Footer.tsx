@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Building2, Mail, Phone } from 'lucide-react';
+import { Mail, Phone } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
@@ -10,8 +10,9 @@ export const Footer: React.FC = () => {
           {/* Logo and Contact */}
           <div>
             <div className="flex items-center mb-6">
-              <Building2 className="h-8 w-8 text-green-400" />
-              <span className="ml-2 text-xl font-bold">FacilitiEase</span>
+              {/* <Building2 className="h-8 w-8 text-green-400" />
+              <span className="ml-2 text-xl font-bold">FacilitiEase</span> */}
+              <img src='/FacilitiEase-logo-dark.png' alt='FacilitiEase Logo' className='h-full w-3/4' />
             </div>
             <div className="space-y-4">
               <p className="text-sm text-gray-400">Total Ease Customer Care</p>

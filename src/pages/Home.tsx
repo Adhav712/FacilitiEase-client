@@ -127,16 +127,16 @@ export const Home: React.FC = () => {
   ];
 
   const trustedByLogos = [
-    { src: 'https://via.placeholder.com/150x50', alt: 'Weebsite Studio' },
+    { src: 'public/TrustedCompanyLogos/Weebsitestudio_logo-04 1.png', alt: 'Weebsite Studio' },
     {
-      src: 'https://via.placeholder.com/150x50',
+      src: 'public/TrustedCompanyLogos/Weebsitestudio_logo-04 2.png',
       alt: 'Creative Poster Designer',
     },
-    { src: 'https://via.placeholder.com/150x50', alt: 'Artlex' },
-    { src: 'https://via.placeholder.com/150x50', alt: 'Madrasi Buddha' },
-    { src: 'https://via.placeholder.com/150x50', alt: 'Proud' },
-    { src: 'https://via.placeholder.com/150x50', alt: 'Man & Rani' },
-    { src: 'https://via.placeholder.com/150x50', alt: 'College' },
+    { src: 'public/TrustedCompanyLogos/Weebsitestudio_logo-04 3.png', alt: 'Artlex' },
+    { src: 'public/TrustedCompanyLogos/Weebsitestudio_logo-04 4.png', alt: 'Madrasi Buddha' },
+    { src: 'public/TrustedCompanyLogos/Weebsitestudio_logo-04 5.png', alt: 'Proud' },
+    { src: 'public/TrustedCompanyLogos/Weebsitestudio_logo-04 6.png', alt: 'Man & Rani' },
+    { src: 'public/TrustedCompanyLogos/Weebsitestudio_logo-04 7.png', alt: 'College' },
   ];
 
   return (
@@ -225,47 +225,50 @@ export const Home: React.FC = () => {
       </div>
 
       {/* Featured Facilities Section */}
-      <div className="mb-16">
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900">
-              Discover Our Featured Facilitiease
-            </h2>
-            <p className="text-gray-600">Top-picked facilitiease for you</p>
-          </div>
-          <a
-            href="#"
-            className="text-sm text-gray-700 hover:text-gray-900 flex items-center"
-          >
-            See All Facilitiease
-            <ChevronRight className="h-4 w-4 ml-1" />
-          </a>
-        </div>
-
-        <div className="relative">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredFacilities.map((facility, index) => (
-              <FeaturedFacility key={index} {...facility} isFeatured />
-            ))}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="py-16 mb-16">
+          <div className="flex justify-between items-center mb-8">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900">
+                Discover Our Featured Facilitiease
+              </h2>
+              <p className="text-gray-600">Top-picked facilitiease for you</p>
+            </div>
+            <a
+              href="#"
+              className="text-sm text-gray-700 hover:text-gray-900 flex items-center"
+            >
+              See All Facilitiease
+              <ChevronRight className="h-4 w-4 ml-1" />
+            </a>
           </div>
 
-          <div className="flex justify-center mt-8 space-x-2">
-            {[0, 1, 2].map((dot) => (
-              <button
-                key={dot}
-                onClick={() => setCurrentSlide(dot)}
-                className={`h-2 w-2 rounded-full ${
-                  currentSlide === dot ? 'bg-gray-800' : 'bg-gray-300'
-                }`}
-              />
-            ))}
+          <div className="relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {featuredFacilities.map((facility, index) => (
+                <FeaturedFacility key={index} {...facility} isFeatured />
+              ))}
+            </div>
+
+            <div className="flex justify-center mt-8 space-x-2">
+              {[0, 1, 2].map((dot) => (
+                <button
+                  key={dot}
+                  onClick={() => setCurrentSlide(dot)}
+                  className={`h-2 w-2 rounded-full ${currentSlide === dot ? 'bg-gray-800' : 'bg-gray-300'
+                    }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-            {/* Facilities Finder Section */}
-      <div className="bg-white rounded-lg p-8">
-        <FacilitiesFinder features={finderFeatures} />
+      {/* Facilities Finder Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white rounded-lg p-8">
+          <FacilitiesFinder features={finderFeatures} />
+        </div>
       </div>
 
       {/* Testimonials Section */}
@@ -315,11 +318,10 @@ export const Home: React.FC = () => {
               <button
                 key={dot}
                 onClick={() => setCurrentTestimonialSlide(dot)}
-                className={`h-2 w-2 rounded-full transition-colors ${
-                  currentTestimonialSlide === dot
-                    ? 'bg-gray-800'
-                    : 'bg-gray-300'
-                }`}
+                className={`h-2 w-2 rounded-full transition-colors ${currentTestimonialSlide === dot
+                  ? 'bg-gray-800'
+                  : 'bg-gray-300'
+                  }`}
               />
             ))}
           </div>

@@ -20,7 +20,7 @@ export const TrustedBy: React.FC<TrustedByProps> = ({ logos }) => {
               key={index}
               src={logo.src}
               alt={logo.alt}
-              className="h-8 md:h-12 object-contain grayscale hover:grayscale-0 transition-all"
+              className="h-8 md:h-12 object-contain"
             />
           ))}
         </div>
