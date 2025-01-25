@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useAuthStore } from '../../store/authStore';
-import { BarChart3, Bell } from 'lucide-react';
 import { DashboardCard } from '../../components/dashboard/DashboardCard';
 import { DashboardChart } from '../../components/dashboard/DashboardChart';
 import { NotificationItem } from '../../components/dashboard/NotificationItem';
@@ -37,7 +36,7 @@ export const Dashboard: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 bg-gray-100">
       <div className="mb-6 sm:mb-8">
         <h1 className="text-xl sm:text-2xl font-semibold text-gray-900">
           Hello, {user?.name}!
@@ -86,11 +85,10 @@ export const Dashboard: React.FC = () => {
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab as typeof activeTab)}
-                  className={`px-3 sm:px-4 py-1 rounded-full text-sm ${
-                    activeTab === tab
-                      ? 'bg-black text-white'
-                      : 'text-gray-600 hover:bg-gray-100'
-                  }`}
+                  className={`px-3 sm:px-4 py-1 rounded-full text-sm ${activeTab === tab
+                    ? 'bg-black text-white'
+                    : 'text-gray-600 hover:bg-gray-100'
+                    }`}
                 >
                   {tab}
                 </button>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 import { useAuthStore } from '../../store/authStore';
-import { Building2, Mail, Lock, User, ArrowRight } from 'lucide-react';
+import { Building2, Mail, Lock, User, ArrowRight, Eye, EyeOff } from 'lucide-react';
 
 export const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -12,6 +12,18 @@ export const Register: React.FC = () => {
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [type, setType] = useState('password');
+  const [icon, setIcon] = useState('eyeOff');
+
+  const handleToggle = () => {
+    if (type === 'password') {
+      setIcon('eye');
+      setType('text')
+    } else {
+      setIcon('eyeOff')
+      setType('password')
+    }
+  }
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -131,6 +143,13 @@ export const Register: React.FC = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                <span className="flex justify-around items-center cursor-pointer absolute right-5 top-1/2 transform -translate-y-1/2
+                " onClick={handleToggle}>
+                  {
+                    icon === 'eye' ? <Eye className={`h-5 w-5 text-gray-400 absolute ${type === 'password' ? 'opacity-100' : ' text-green-500'
+                      }`} /> : <EyeOff className="h-5 w-5 text-gray-400 absolute" />
+                  }
+                </span>
               </div>
             </div>
 
