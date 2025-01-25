@@ -13,12 +13,14 @@ import { CategoryPage } from './pages/categories/CategoryPage';
 import { IncubatorDetail } from './pages/incubator/IncubatorDetail';
 import { PrivateRoute } from './components/auth/PrivateRoute';
 import { TanstackWrapper } from './hooks/TanstackProvider';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [animationParent] = useAutoAnimate();
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen">
+    <div ref={animationParent} className="flex flex-col lg:flex-row min-h-screen">
       <MobileHeader onMenuClick={() => setIsSidebarOpen(true)} />
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
       <div className="flex-1">
@@ -29,10 +31,11 @@ const DashboardLayout = () => {
 };
 
 const MainLayout = () => {
+  const [animationParent] = useAutoAnimate();
   return (
     <>
       <Navbar />
-      <div className="min-h-screen">
+      <div ref={animationParent} className="min-h-screen">
         <Outlet />
       </div>
       <Footer />
