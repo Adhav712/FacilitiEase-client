@@ -87,7 +87,7 @@ export const CategoryPage: React.FC = () => {
         title: space.name,
         location: space.location,
         price: space.price_per_day,
-        image: space.images[0] || 'https://images.unsplash.com/photo-1497366216548-37526070297c',
+        image: space.images[0],
         features: space.facilities || [],
         isFeatured: false, // You can set this based on your criteria
       }));
@@ -282,7 +282,8 @@ export const CategoryPage: React.FC = () => {
                   </div>
                 </div>
                 <div className="p-4">
-                  <Link to="/incubator/1">
+                  <Link to={`/incubator/${facility.id
+                    }`}>
                     <h3 className="font-semibold text-gray-900 mb-1">
                       {facility.title}
                     </h3>

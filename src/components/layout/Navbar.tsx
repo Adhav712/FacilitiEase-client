@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '../../store/authStore';
-import { Building2 } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
-  const { user, isAuthenticated, logout } = useAuthStore();
+  const { isAuthenticated, logout } = useAuthStore();
 
   return (
     <nav className="bg-white/80 backdrop-blur-md border-b border-gray-200 fixed w-full z-50">
@@ -12,8 +11,8 @@ export const Navbar: React.FC = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <Building2 className="h-8 w-8 text-green-600" />
-              <span className="ml-2 text-xl font-bold text-gray-900">FacilitiEase</span>
+              {/* <Building2 className="h-8 w-8 text-green-600" /> */}
+              <img src='/FacilitiEase-logo.png' alt='FacilitiEase Logo' className='h-full w-3/4' />
             </Link>
             <div className="hidden md:flex ml-10 space-x-8">
               <Link to="/" className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">
