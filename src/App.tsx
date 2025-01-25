@@ -12,6 +12,7 @@ import { Dashboard } from './pages/dashboard/Dashboard';
 import { CategoryPage } from './pages/categories/CategoryPage';
 import { IncubatorDetail } from './pages/incubator/IncubatorDetail';
 import { PrivateRoute } from './components/auth/PrivateRoute';
+import { TanstackWrapper } from './hooks/TanstackProvider';
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -87,7 +88,12 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return <TanstackWrapper
+    children={
+      <RouterProvider router={router} />
+    }
+  />
+
 }
 
 export default App;

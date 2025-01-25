@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Search, SlidersHorizontal } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '../../lib/supabase';
 
 interface Facility {
   id: string;
@@ -13,6 +15,16 @@ interface Facility {
   isFeatured?: boolean;
 }
 
+interface Space {
+  id: string;
+  name: string;
+  location: string;
+  price_per_day: number;
+  images: string[];
+  facilities: string[];
+}
+
+
 export const CategoryPage: React.FC = () => {
   const { category } = useParams<{ category: string }>();
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 100000]);
@@ -22,27 +34,73 @@ export const CategoryPage: React.FC = () => {
     location: 'all',
   });
 
-  const facilities: Facility[] = [
-    {
-      id: '1',
-      title: 'Vignan Technology Business Incubator',
-      location: 'Vadlamudi, Guntur, Andhra Pradesh, 522213',
-      price: 14000,
-      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c',
-      features: ['Parking', 'Beverages', '3+ More'],
-      isFeatured: true,
+  // const facilities: Facility[] = [
+  //   {
+  //     id: '1',
+  //     title: 'Vignan Technology Business Incubator',
+  //     location: 'Vadlamudi, Guntur, Andhra Pradesh, 522213',
+  //     price: 14000,
+  //     image: 'https://images.unsplash.com/photo-1497366216548-37526070297c',
+  //     features: ['Parking', 'Beverages', '3+ More'],
+  //     isFeatured: true,
+  //   },
+  //   {
+  //     id: '2',
+  //     title: 'SSN Incubation Foundation',
+  //     location: 'Park Gandhi Sale (Om), Chennai - 603110',
+  //     price: 14000,
+  //     image: 'https://images.unsplash.com/photo-1497366412874-3415097a27e7',
+  //     features: ['Parking', 'Beverages', '3+ More'],
+  //     isFeatured: true,
+  //   },
+  //   // Add more facilities as needed
+  // ];
+
+  const { data: facilities, isLoading } = useQuery({
+    queryKey: ['spaces', category, selectedFilters, priceRange],
+    queryFn: async () => {
+      let query = supabase
+        .from('spaces')
+        .select('*')
+        .eq('available', true);
+
+      // Apply filters
+      if (selectedFilters.location !== 'all') {
+        query = query.ilike('location', `%${selectedFilters.location}%`);
+      }
+
+      if (priceRange) {
+        query = query
+          .gte('price_per_day', priceRange[0])
+          .lte('price_per_day', priceRange[1]);
+      }
+
+      const { data, error } = await query;
+
+      if (error) {
+        throw error;
+      }
+
+      // Transform the data to match the Facility interface
+      return data.map((space: Space) => ({
+        id: space.id,
+        title: space.name,
+        location: space.location,
+        price: space.price_per_day,
+        image: space.images[0] || 'https://images.unsplash.com/photo-1497366216548-37526070297c',
+        features: space.facilities || [],
+        isFeatured: false, // You can set this based on your criteria
+      }));
     },
-    {
-      id: '2',
-      title: 'SSN Incubation Foundation',
-      location: 'Park Gandhi Sale (Om), Chennai - 603110',
-      price: 14000,
-      image: 'https://images.unsplash.com/photo-1497366412874-3415097a27e7',
-      features: ['Parking', 'Beverages', '3+ More'],
-      isFeatured: true,
-    },
-    // Add more facilities as needed
-  ];
+  });
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -203,7 +261,7 @@ export const CategoryPage: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {facilities.map((facility) => (
+            {facilities?.map((facility) => (
               <div
                 key={facility.id}
                 className="bg-white rounded-lg shadow-sm overflow-hidden"
@@ -249,11 +307,10 @@ export const CategoryPage: React.FC = () => {
             {[1, 2, 3].map((page) => (
               <button
                 key={page}
-                className={`px-4 py-2 rounded-md ${
-                  page === 1
-                    ? 'bg-green-600 text-white'
-                    : 'bg-white text-gray-700 hover:bg-gray-50'
-                }`}
+                className={`px-4 py-2 rounded-md ${page === 1
+                  ? 'bg-green-600 text-white'
+                  : 'bg-white text-gray-700 hover:bg-gray-50'
+                  }`}
               >
                 {page}
               </button>
