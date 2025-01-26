@@ -29,3 +29,7 @@ build
 /build
 
 .vite
+.vercel
+
+.env
+env.env
