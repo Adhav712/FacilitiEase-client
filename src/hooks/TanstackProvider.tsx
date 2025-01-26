@@ -14,7 +14,7 @@ export function TanstackWrapper(
   return (
     // Provide the client to your App
     <QueryClientProvider client={queryClient}>
-      {children}
+        {children}
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
