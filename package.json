@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@formkit/auto-animate": "^0.8.2",
+    "@heroicons/react": "^2.2.0",
+    "@heroui/react": "^2.6.14",
     "@supabase/supabase-js": "^2.39.7",
     "@tanstack/react-query": "^5.64.2",
     "@tanstack/react-query-devtools": "^5.64.2",
