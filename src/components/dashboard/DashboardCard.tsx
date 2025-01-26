@@ -15,7 +15,7 @@ export const DashboardCard: React.FC<DashboardCardProps> = ({
   className = '',
 }) => {
   return (
-    <div className={`rounded-lg p-6 shadow-sm ${className}`}>
+    <div className={`bg-white rounded-lg p-6 ${className}`}>
       <h3 className="text-sm text-gray-600 mb-2">{title}</h3>
       <div className="flex items-center justify-between">
         <span className="text-2xl font-semibold">{value}</span>

@@ -25,8 +25,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const mainMenuItems = [
     { icon: LayoutGrid, label: 'Dashboard', path: '/dashboard' },
     { icon: Calendar, label: 'Bookings', path: '/dashboard/bookings' },
-    { icon: PlusCircle, label: 'Add New Facilities', path: '/dashboard/add-facility' },
-    { icon: Building2, label: 'My Services & facilities', path: '/dashboard/services' },
+    // { icon: PlusCircle, label: 'Add New Facilities', path: '/dashboard/add-facility' },
+    // { icon: Building2, label: 'My Services & facilities', path: '/dashboard/services' },
     { icon: HelpCircle, label: 'Support Center', path: '/dashboard/support' },
   ];
 
