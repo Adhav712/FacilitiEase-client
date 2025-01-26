@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Search, SlidersHorizontal } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -117,6 +117,12 @@ export const CategoryPage: React.FC = () => {
                       name="listingStatus"
                       value={status.toLowerCase()}
                       className="h-4 w-4 text-green-600 focus:ring-green-500"
+                      onChange={(e) => {
+                        setSelectedFilters((prevFilters) => ({
+                          ...prevFilters,
+                          listingStatus: e.target.value,
+                        }));
+                      }}
                     />
                     <span className="ml-2 text-sm text-gray-700">{status}</span>
                   </label>
@@ -139,6 +145,17 @@ export const CategoryPage: React.FC = () => {
                     <input
                       type="checkbox"
                       className="h-4 w-4 text-green-600 focus:ring-green-500 rounded"
+                      onChange={(e) => {
+                        const { value, checked } = e.target;
+                        setSelectedFilters((prevFilters) => ({
+                          ...prevFilters,
+                          propertyType: checked
+                            ? [...prevFilters.propertyType, value]
+                            : prevFilters.propertyType.filter(
+                              (type) => type !== value
+                            ),
+                        }));
+                      }}
                     />
                     <span className="ml-2 text-sm text-gray-700">{type}</span>
                   </label>
@@ -220,9 +237,16 @@ export const CategoryPage: React.FC = () => {
             {/* Location */}
             <div className="mb-6">
               <h3 className="font-semibold mb-3">Location</h3>
-              <select className="w-full p-2 border border-gray-300 rounded-md">
+              <select className="w-full p-2 border border-gray-300 rounded-md" onChange={
+                (e) => {
+                  const value = e.target.value;
+                  setSelectedFilters((prevFilters) => ({
+                    ...prevFilters,
+                    location: value,
+                  }));
+                }
+              }>
                 <option>All Cities</option>
-                {/* Add more cities */}
               </select>
             </div>
 
